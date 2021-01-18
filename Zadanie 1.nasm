@@ -47,7 +47,7 @@ sub ax, word [Num4]
 mov word [Ans6], ax
 
 call _mul
-call _div
+call _end
 
 _end:
 mov rax, 60
@@ -58,15 +58,15 @@ _mul:
 mov ax, word [Num1]
 mul word [Num3]
 mov word [Ans7], ax
-mow word [Ans7 + 2], dx
+mov word [Ans7 + 2], dx
 
 mov ax, word [Num2]
 mul word [Num2]
 mov word [Ans8], ax
-mow word [Ans8 + 2], dx
+mov word [Ans8 + 2], dx
 
 mov ax, word [Num2]
 mul word [Num4]
 mov word [Ans9], ax
-mow word [Ans9 + 2], dx
+mov word [Ans9 + 2], dx
 
