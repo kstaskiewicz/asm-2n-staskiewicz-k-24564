@@ -6,8 +6,7 @@ tab: dq 40, 160, 154, 364, 1027, 310, 1216, 991, 820, 307
 section .data
 
 file db "zaliczenie.txt", 0
-fileFlags dq 0102o         ; create file + read and write mode
-fileMode  dq 00666o        ; user has read write permission
+
 
 
 section .bss
@@ -76,10 +75,7 @@ opusc:
 
     
 
-    ; 3 parametry do funkcji open
-    mov rdi, file
-    mov rsi, [fileFlags]
-    mov rdx, [fileMode]
+   
     
 
 SaveFile:
