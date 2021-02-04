@@ -1,10 +1,3 @@
-extern printf
-extern open
-extern write
-extern close
-
-
-
 section .data
 
 tab: dq 40, 160, 154, 364, 1027, 310, 1216, 991, 820, 307
