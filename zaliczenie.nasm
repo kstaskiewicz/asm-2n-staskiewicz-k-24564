@@ -3,9 +3,8 @@ section .data
 tab: dq 40, 160, 154, 364, 1027, 310, 1216, 991, 820, 307
 
 
-section .rodata
+section .data
 
-format db "%ld, ", 10, 0
 file db "zaliczenie.txt", 0
 fileFlags dq 0102o         ; create file + read and write mode
 fileMode  dq 00666o        ; user has read write permission
@@ -111,15 +110,10 @@ SaveFile:
             mov rdi, [fd]
             syscall
 
-    mov rdi, format
-    mov rsi, rax
-
-    xor rax, rax
-
-
-
     
-    pop r12 ;przywracamy rejestr do stanu początkowego
-
-    ;ret    
+	
+	_end:
+    mov rax, 60
+    mov rdi, 0
+    syscall
 
