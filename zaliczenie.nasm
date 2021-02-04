@@ -41,7 +41,7 @@ petla02:
 ;dzielimy
     mov r12, 0;
 petla04:
-    pop RAX
+    pop rax
     mov rcx, 3
     xor rdx, rdx
     div rcx
