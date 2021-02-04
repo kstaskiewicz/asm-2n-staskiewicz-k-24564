@@ -7,27 +7,28 @@ extern close
 
 section .data
 
-tab: dq 40, 160, 154, 364, 1027, 310, 1216, 991, 820, 307, 123456789012345678, 12, 13
+tab: dq 40, 160, 154, 364, 1027, 310, 1216, 991, 820, 307
 
 
 section .rodata
-format: db "%ld, ", 10, 0
-file: db "zaliczenie.txt", 0
-fileFlags: dq 0102o         ; create file + read and write mode
-fileMode:  dq 00666o        ; user has read write permission
+
+format db "%ld, ", 10, 0
+file db "zaliczenie.txt", 0
+fileFlags dq 0102o         ; create file + read and write mode
+fileMode  dq 00666o        ; user has read write permission
 
 
 section .bss
-
-tab01: resq 10		;tablica tab/3
-tabw: resb 6		;tablica ktorą będziemy zapisywać w pliku
+fd    resq 1
+tab01 resq 10		;tablica tab/3
+tabw resb 6		;tablica ktorą będziemy zapisywać w pliku
 
 
 section .text
 
-global main
+global _start
 
-main:
+_start:
 
     push r12		;zapiszemy sobie R12 bo będziemy używać jako iterator pętli a powinniśmy zostawyć ten rejest nienaruszony.
 
@@ -89,20 +90,33 @@ opusc:
     mov rdx, [fileMode]
     
 
-    call open			; otwieramy plik "zaliczenie.txt"
-
-    push rax		;zapisujemy na stos uchwyt pliku żeby się nie zapodział
-
-    mov rdi, rax	;parametry do funkcji write; pierwszy parametr
-    mov rsi, tabw	; 2 parametr co zapisujemy
-    mov rdx, 6		; 3 parametr ile zapisujemy
-
-    call write		;zapisujemy do pliku
-    
-    pop rdi		;pobieramy ze stosu uchwyt do pliku
+SaveFile:
+        call OpenFile
+        call WriteFile
+        call CloseFile
 
 
-    call close		;zamykamy plik
+    OpenFile:
+            mov rax, 2          
+            mov rdi, file_name  
+            mov rsi, 577      
+            mov rdx, 0644o    
+            syscall
+            mov [fd], rax
+            ret    
+ 
+        WriteFile:
+            mov rax, 1
+            mov rdi, [fd]
+            mov rsi, tabw    
+            mov rdx, 6
+            syscall
+            ret
+ 
+        CloseFile:
+            mov rax, 3  
+            mov rdi, [fd]
+            syscall
 
     mov rdi, format
     mov rsi, rax
