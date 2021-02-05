@@ -1,4 +1,4 @@
-section .data
+﻿section .data
 
 tab: dq 40, 160, 154, 364, 1027, 310, 1216, 991, 820, 307
 
@@ -60,7 +60,7 @@ petla04:
     mov rcx, 0
 	
 l3:
-        mov rbx, qword [tb01+rdi*8]
+        mov rbx, qword [tab01+rdi*8]
         cmp rbx,255
         jg koniec
         tak:
@@ -84,7 +84,7 @@ l3:
 
     mov rax, 1
     mov rdi, [fd_in]
-    mov rsi, tbw
+    mov rsi, tabw
     mov rdx, 6
     syscall
     
