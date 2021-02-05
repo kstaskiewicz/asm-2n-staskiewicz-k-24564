@@ -33,7 +33,7 @@ petla02:
     inc r12		;pomniejszamy iterator
 
     cmp r12, 9
-    jge petla02		;dopoki iterator >=0 to skaczemy
+    jnle petla02		;dopoki iterator >=0 to skaczemy
 
 
 
